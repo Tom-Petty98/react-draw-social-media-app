@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DrawPage from './draw/create-drawing';
+import DrawPage from './draw/draw-page.js';
 import './style.css';
 
 ReactDOM.render(

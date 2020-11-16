@@ -1,5 +1,3 @@
-import p5  from "p5";
-
 const colorInput = document.getElementById('color');
 const weight = document.getElementById('weight');
 const clear = document.getElementById('clear');
@@ -47,30 +45,9 @@ function mousePressed() {
   paths.p5.push(currentPath);
 }
 
+if(clear){
 clear.addEventListener('click', () => {
   paths.splice(0);
   background(255);
 });
-
-function DrawPage() {
-  return (
-    <div class="sidebar">
-    <script defer src='../src/draw/create-drawing.js'></script>
-    <ul>
-        <li>
-            <label for="color">Color:</label>
-            <input type="color" id="color" />
-        </li>
-        <li>
-            <label for="weight">Stroke:</label>
-            <input type="number" id="weight" min="2" max="200" value="3" />
-        </li>
-        <li>
-            <button id="clear"><i class="fa fa-trash"></i></button>
-        </li>
-    </ul>
-    </div>
-  )
 }
-
-export default DrawPage;
