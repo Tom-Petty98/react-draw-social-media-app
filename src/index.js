@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DrawPage from './draw/draw-page.js';
+import App from './App'
 import './style.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DrawPage />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
