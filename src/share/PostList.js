@@ -1,13 +1,12 @@
 import React from 'react'
+import Post from './Post'
 
-// This will loop through each Post component and output it in  the correct way
-
-function PostList() {
-    return (
-        <div>
-            
-        </div>
-    )
-}
-
-export default PostList
+export default function PostList({ posts, toggleLike }) {
+		let postsToRender;
+		if (posts){
+			postsToRender = posts.map(post => {
+        return <Post key={post.id} toggleLike={toggleLike} post={post} />
+		});
+	}
+    return <div>{postsToRender}</div>;
+  }

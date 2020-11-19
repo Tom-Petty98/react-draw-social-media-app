@@ -6,12 +6,13 @@ import React, { Component } from 'react'
 export default class ShareDrawing extends Component {
     constructor(props) {
         super(props);
-        this.state = {            
+        this.state = {
+            id: 'autoincrement functionality here',           
             title:'',
             description: '',
             picture: '',
             likes: 0,
-            comments: 0,
+            comments: 'maybe this just holds a refernce to the comments table',
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -30,6 +31,7 @@ export default class ShareDrawing extends Component {
         });
       }
     
+      // this will be used at some point to store data in a database
       handleSubmit(event) {
         alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
