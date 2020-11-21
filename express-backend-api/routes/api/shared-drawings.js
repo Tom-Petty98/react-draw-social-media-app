@@ -6,4 +6,4 @@ router.get('/', (req, res) => {
   res.send('Api call')
 })
 
-modules.exports = router;
+module.exports = router;

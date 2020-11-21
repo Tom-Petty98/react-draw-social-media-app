@@ -1,12 +1,13 @@
 const express = require('express')
-  //  sql = require(sql)
-  require('dotenv/config');
+const { Sequelize, DataTypes } = require('sequelize');
+
+require('dotenv/config');
 
 const app = express();
 
-// sql.connect(
-//   process.env.DB_CONNECTION,
-//   { useNewUrlParser: true}
-// );
+const sequelize = new Sequelize(process.env.DATABASE_URL);
+sequelize.require('./models/')
+
+app.use(require('./routes'))
 
 app.listen(3001);

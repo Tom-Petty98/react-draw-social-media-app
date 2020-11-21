@@ -1,6 +1,6 @@
 var router = require('express').Router();
 
-router.use('/', require('./shared-drawings'));
+router.use('/posts', require('./shared-drawings'));
 
 // error handling and validation logic here
 
