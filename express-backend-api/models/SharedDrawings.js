@@ -19,3 +19,5 @@ const SharedDrawings = sequelize.define('SharedDrawings', {
   timestamps: false
   }
   );
+
+  module.exports = SharedDrawings
