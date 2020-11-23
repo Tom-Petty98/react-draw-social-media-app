@@ -25,14 +25,12 @@ router.post('/', (req, res) => {
     return;
   }
 
-  // Create a Tutorial
   const shared_drawing = {
     title: req.body.title,
     description: req.body.description,
     picture: req.body.picture
   };
 
-  // Save Tutorial in the database
   SharedDrawing.create(shared_drawing)
     .then(data => {
       res.send(data);
