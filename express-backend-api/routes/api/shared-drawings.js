@@ -1,7 +1,6 @@
 var router = require('express').Router();
 const db = require("../../models");
 const SharedDrawing = db.sharedDrawings;
-const drawings = require("../../controllers/drawings_controller.js")
 
 // url is api/
 router.get('/', (req, res) => {
@@ -34,7 +33,7 @@ router.post('/', (req, res) => {
   };
 
   // Save Tutorial in the database
-  await SharedDrawing.create(shared_drawing)
+  SharedDrawing.create(shared_drawing)
     .then(data => {
       res.send(data);
     })
@@ -46,11 +45,52 @@ router.post('/', (req, res) => {
     });  
 });
 
-router.put("/:id", (req, res) => {
+router.put("/update/:id", (req, res) => {
+  const id = req.params.id;
 
-})
+  SharedDrawing.update(req.body, {
+    where: { drawing_id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Drawing was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Drawing with id=${id}. Maybe Drawing was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Drawing with id=" + id
+      });
+    });
+});
 
-router.delete("/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
 
-})
+  SharedDrawing.destroy({
+    where: { drawing_id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Drawing was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Drawing with id=${id}. Maybe Tutorial was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Drawing with id=" + id
+      });
+    });
+});
+
 module.exports = router;
