@@ -8,13 +8,18 @@ import React, { useState } from 'react'
 function Post({post, toggleLike}) {
   
   function handleLikeClick(){
-    toggleLike(post.id)
+    toggleLike(post.drawing_id)
   }
 
-  let [opened, setOpened] = useState(false);
+  let [description_opened, setDescOpened] = useState(false);
+  let [comments_opened, setCommentsOpened] = useState(false)
 
-  function toggleOpen(e){
-    setOpened(opened = !opened) 
+  function toggleDescription(e){
+    setDescOpened(description_opened = !description_opened) 
+  }
+
+  function toggleComments(e){
+    setCommentsOpened(comments_opened = !comments_opened) 
   }
   
 
@@ -22,11 +27,11 @@ function Post({post, toggleLike}) {
     <div>
       <h1>{post.title}</h1>
       <img src={post.picture} alt=""></img>
-      <input className="like-button" type="checkbox" checked={post.liked} onChange={handleLikeClick}></input>
-      <button className="description-arrow" onClick={toggleOpen}>Description</button>
-      {opened && 
+      {/* <input className="like-button" type="checkbox" checked={post.liked} onChange={handleLikeClick}></input> */}
+      <button className="description-arrow" onClick={toggleDescription}>Description</button>
+      {description_opened && 
       <p>{post.description}</p>}   
-      <button className="comments-button" onClick="myFunction()">Display num of comments underneath</button>
+      <button className="comments-button" onClick={toggleComments}>Display num of comments underneath</button>
     </div>
   )
 }

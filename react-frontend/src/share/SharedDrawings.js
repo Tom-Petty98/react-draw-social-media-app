@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import PostList from './PostList'
+import PostList from './PostList';
+import { useFetch } from './../hooks.js';
 
 function SharedDrawings() {
-	const [posts, setPosts] = useState([{id: 0, title: "Doodle", picture: "https://apkpure.com/easy-doodle-art-ideas/com.easydoodleartideas.xpanders#com.easydoodleartideas.xpanders-1",
-description: "Random doodle from online", no_of_likes: 0, date_posted:"10/10/2020"},
-{id: 1, title: "Doodle2", picture: "https://apkpure.com/easy-doodle-art-ideas/com.easydoodleartideas.xpanders#com.easydoodleartideas.xpanders-1",
-description: "Random doodle from online", no_of_likes: 0, date_posted:"10/10/2020"}]);
+
+	const [posts, loading] = useFetch("http://35.246.46.190:3001/api/posts");
 
 	// allows you to like and unlike
   function toggleLike(id) {
