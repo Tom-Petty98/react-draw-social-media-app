@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({

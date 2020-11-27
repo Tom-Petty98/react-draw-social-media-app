@@ -4,7 +4,7 @@ import { useFetch } from './../hooks.js';
 
 function SharedDrawings() {
 
-	const [posts, loading] = useFetch("http://35.246.46.190:3001/api/posts");
+	const [posts, loading] = useFetch("http://localhost:3001/api/posts");
 
 	// allows you to like and unlike
   function toggleLike(id) {

@@ -10,7 +10,7 @@ return (
   <Router>
 		<div>
 	  	<Switch>
-			<Route path="/">
+			<Route path="/posts">
 				<SharedDrawings />
 			</Route>
 			<Route path="/draw">
