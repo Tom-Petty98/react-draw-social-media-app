@@ -35,8 +35,8 @@ class EditDrawing extends Component {
       }
     
 
-      handleSubmit(event) {       
-        axios.post('http://localhost:3001/api/posts/update/:' + this.props.post.id.toString(), {
+      async handleSubmit(event) {       
+        await axios.patch('http://34.89.5.244:3001/api/posts/update/' + this.props.post.drawing_id.toString(), {
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture
@@ -52,7 +52,8 @@ class EditDrawing extends Component {
       render() {
         const { title, description, picture } = this.state
         return (
-          <form method='POST' onSubmit={this.handleSubmit}>
+          <form method='PATCH' onSubmit={this.handleSubmit}>
+            <br />
             <label>
               Title:
               <input type="text" value={title} onChange={e => this.handleChange(e, 'title')} />
@@ -64,6 +65,7 @@ class EditDrawing extends Component {
                 Description:
                 <textarea value={description} onChange={e => this.handleChange(e, 'description')} />
             </label>
+            <br />
             <button type="submit">Submit</button>
             <button onClick={this.discardChanges}>Discard Changes</button>
           </form>

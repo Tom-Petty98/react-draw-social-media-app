@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import EditDrawing from './EditDrawing';
+const axios = require('axios');
 
 // so that each post has its own comments and description each will have to rendered here
 // comments will be hidden but can be accessed by clicking the comments icon.
@@ -29,20 +30,29 @@ function Post({post, toggleLike}) {
     setEditOpened(edit_post = !edit_post)
   }
 
+  async function handleDeleteClick(){
+    await axios.delete('http://localhost:3001/api/posts/delete/' + post.drawing_id.toString())
+        .then( response => console.log(response))
+        .catch( error => console.log(error));
+  }
+
   if(edit_post){
     return <EditDrawing post={post} handleEditClick={handleEditClick} />
   }
 
   return (
     <div>
-      <h1>{post.title}</h1>
-      <button onClick={handleEditClick}>Edit Post</button>
+      <h1>{post.title}</h1>     
       <img src={post.picture} alt=""></img>
       {/* <input className="like-button" type="checkbox" checked={post.liked} onChange={handleLikeClick}></input> */}
       <button className="description-arrow" onClick={toggleDescription}>Description</button>
+      <button onClick={handleEditClick}>Edit Post</button>
+      <button onClick={handleDeleteClick}>Delete Post</button>
+      <br />
       {description_opened && 
       <p>{post.description}</p>}   
-      <button className="comments-button" onClick={toggleComments}>Display num of comments underneath</button>
+      <button className="comments-button" onClick={toggleComments}>Display comments</button>
+      <br />
     </div>
   )
 }

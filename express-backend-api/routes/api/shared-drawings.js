@@ -43,7 +43,7 @@ router.post('/create', (req, res) => {
     });  
 });
 
-router.put("/update/:id", (req, res) => {
+router.patch("/update/:id", (req, res) => {
   const id = req.params.id;
 
   SharedDrawing.update(req.body, {

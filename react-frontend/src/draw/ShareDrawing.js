@@ -1,9 +1,7 @@
-// this doc will contain the form for creating a post
-// need to intialize likes and comments to zero
-
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-const axios = require('axios')
+const axios = require('axios');
+
 
 class ShareDrawing extends Component {
     constructor(props) {
@@ -20,12 +18,9 @@ class ShareDrawing extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
       }
     
-      //for somereason if a field is a checkbox you have to use 
-      // const value = target.type === 'checkbox' ? target.checked : target.value;
       handleChange(event, name) {
         const target = event.target;
         const value = target.value;
- //       const name = target.getAttribute('name');
 
         this.setState({
             [name]: value
@@ -33,8 +28,8 @@ class ShareDrawing extends Component {
       }
     
 
-      handleSubmit(event) {       
-        axios.post('http://localhost:3001/api/posts/create', {
+      async handleSubmit(event) {       
+        await axios.post('http://localhost:3001/api/posts/create', {
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture
@@ -42,9 +37,9 @@ class ShareDrawing extends Component {
         .then( response => console.log(response))
         .catch( error => console.log(error));
 
-        event.preventDefault();
-        this.props.history.push('/posts');
-  //      window.location.href = 'http://localhost:3000/posts';
+
+      //  this.props.history.push('/posts');
+      //  window.location.href = 'http://loalhost:3000/posts';
       }     
     
       // need to somehow save and retrive the picture when entering this page.
