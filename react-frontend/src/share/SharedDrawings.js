@@ -11,7 +11,7 @@ function SharedDrawings() {
     const post = posts.find(post => post.id === id)
     post.complete = !post.complete
     //setLikes(increment no of likes)
-  }
+	}
 
 	return (
 		<>
