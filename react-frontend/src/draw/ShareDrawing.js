@@ -35,6 +35,7 @@ class ShareDrawing extends Component {
           "picture": this.state.picture
         })
         .then( response => console.log(response))
+        .then(this.props.history.push('/posts'))
         .catch( error => console.log(error));
 
 

@@ -36,7 +36,7 @@ class EditDrawing extends Component {
     
 
       async handleSubmit(event) {       
-        await axios.patch('http://34.89.5.244:3001/api/posts/update/' + this.props.post.drawing_id.toString(), {
+        await axios.patch('http://localhost:3001/api/posts/update/' + this.props.post.drawing_id.toString(), {
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture

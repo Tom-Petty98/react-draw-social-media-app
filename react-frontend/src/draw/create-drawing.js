@@ -6,10 +6,8 @@ let currentPath = [];
 
 function setup() {
   // create a canvas which is full width and height
-  createCanvas(window.innerWidth, window.innerHeight);
-
-  // Add a white background to the canvas
-  background(255);
+  createCanvas(600, 600);
+  background(0);
 }
 
 function draw() {
@@ -24,7 +22,7 @@ function draw() {
               color: colorInput.value,
               weight: weight.value
           };
-          currentPath.p5.push(point);
+          currentPath.push(point);
         }
 
       // Looping over all the paths and drawing all the points inside them
@@ -42,7 +40,7 @@ function draw() {
 //saves prev shape and cleans up path for new shape
 function mousePressed() {
   currentPath = [];
-  paths.p5.push(currentPath);
+  paths.push(currentPath);
 }
 
 if(clear){
