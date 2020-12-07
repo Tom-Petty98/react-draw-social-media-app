@@ -1,61 +1,57 @@
-
-//import {useEffect} from 'react';
-//import {Helmet} from 'react-helmet';
-import React from 'react';
+import React, { Component } from 'react';
 import Sketch from './Sketch';
 
+class DrawPage extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: "#000000",
+      weight: 3,
+      clear: false
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+  }
 
-function DrawPage() {
+  handleChange(event, name) {
+    const value = event.target.value;
 
-//   useEffect(() => {
-//     const p5script = document.createElement('script');
-//     const createDrawingScript = document.createElement('script');
-  
-//     p5script.src = "../src/draw/p5.min.js";
-//     p5script.type="text/jsx";
-//  //   p5script.async = true;
+    this.setState({
+        [name]: value
+    })
+  }
 
-//     createDrawingScript.src = "../src/draw/create-drawing.js";
-//     createDrawingScript.type="text/jsx";
-//   //  createDrawingScript.async = true;
-  
-//     document.head.appendChild(p5script);
-//     document.body.appendChild(createDrawingScript);
-  
-//     return () => {
-//       document.head.removeChild(p5script);
-//       document.body.removeChild(createDrawingScript);
-//     }
-//   }, []);
+  handleClear(){
+    this.setState({
+      clear: !this.state.clear
+    })
+  } 
 
-
-  return (
-    <div>
-      {/* <Helmet>
-        <script type="text/jsx" src="p5.min.js"></script>
-        <script type="text/jsx"  src="create-drawing.js"></script> 
-      </Helmet> */}
-      {/* <script src="p5.min.js"></script> */}
-      {/* <script type="text/jsx" src="../src/draw/p5.min.js"></script> */}
-      <div className="sidebar">        
-        <ul>
-            <li>
-              <label htmlFor="color">Color:</label>
-              <input type="color" id="color" />
-            </li>
-            <li>
-              <label htmlFor="weight">Stroke:</label>
-              <input type="number" id="weight" min="2" max="200" defaultValue="3" />
-            </li>
-            <li>
-              <button id="clear"><i className="fa fa-trash"></i></button>
-            </li>
-        </ul> 
-        {/* <script type="text/jsx"  src="../src/draw/create-drawing.js"></script>        */}
+  render(){
+    const {color, weight, clear} = this.state
+    return (
+      <div>
+        <div className="sidebar">        
+          <ul>
+              <li>
+                <label htmlFor="color">Color:</label>
+                <input type="color" id="color" value={color}
+                onChange={e => this.handleChange(e, 'color')}/>
+              </li>
+              <li>
+                <label htmlFor="weight">Stroke:</label>
+                <input type="number" id="weight" min="2" max="200" value={weight} 
+                onChange={e => this.handleChange(e, 'weight')}/>
+              </li>
+              <li>
+                <button id="clear" onClick={this.handleClear}><i className="fas fa-trash"></i></button>
+              </li>
+          </ul> 
+        </div>
+        <Sketch color={color} weight={weight} clear={clear} handleClear={this.handleClear}/>
       </div>
-      <Sketch />
-    </div>
-  )
+    )
+  }
 }
 
 export default DrawPage;

@@ -1,12 +1,14 @@
 import React from "react";
 import Sketch from "react-p5";
  
+
+
 export default (props) => {
-  const colorInput = document.getElementById('color');
-  const weight = document.getElementById('weight');
-  const clear = document.getElementById('clear');
+  // const colorInput = document.getElementById('color');
+  // const weight = document.getElementById('weight');
+  // const clear = document.getElementById('clear');
   const paths = [];
-  let currentPath = [];  
+  let currentPath = []; 
 
     const setup = (p5, canvasParentRef) => {
         // use parent to render the canvas in this ref
@@ -23,8 +25,8 @@ export default (props) => {
           const point = {
               x: p5.mouseX,
               y: p5.mouseY,
-              color: colorInput.value,
-              weight: weight.value
+              color: props.color,
+              weight: props.weight
           };
           currentPath.push(point);
         }
@@ -39,6 +41,12 @@ export default (props) => {
         });
       p5.endShape();
       });
+
+      if(props.clear){
+        paths.splice(0);
+        p5.background(255);
+        props.handleClear();
+      }
     };
 
     const mousePressed = () => {
@@ -46,10 +54,18 @@ export default (props) => {
       paths.push(currentPath);
     }
 
+    // if(props.clear){
+    //   paths.splice(0);
+    //   const resetBackground = p5 => {p5.background(255)}
+    //   resetBackground();
+    //   props.handleClear();
+    // }
+
     // if(clear){
     //   clear.addEventListener('click', () => {
     //     paths.splice(0);
-    //     Sketch.p5.background(255);
+    //     const resetBackground = p5 => {p5.background(255)}
+    //     resetBackground();
     //   });
     //   }
  
