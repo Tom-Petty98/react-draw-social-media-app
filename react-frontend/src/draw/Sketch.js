@@ -1,12 +1,7 @@
 import React from "react";
 import Sketch from "react-p5";
  
-
-
 export default (props) => {
-  // const colorInput = document.getElementById('color');
-  // const weight = document.getElementById('weight');
-  // const clear = document.getElementById('clear');
   const paths = [];
   let currentPath = []; 
 
@@ -47,6 +42,12 @@ export default (props) => {
         p5.background(255);
         props.handleClear();
       }
+
+      if(props.share){
+    //    p5.saveCanvas('myCanvas', 'jpg');
+        props.handleShare();
+        window.location.href = 'http://34.89.5.37:3000/share';
+      }
     };
 
     const mousePressed = () => {
@@ -54,20 +55,5 @@ export default (props) => {
       paths.push(currentPath);
     }
 
-    // if(props.clear){
-    //   paths.splice(0);
-    //   const resetBackground = p5 => {p5.background(255)}
-    //   resetBackground();
-    //   props.handleClear();
-    // }
-
-    // if(clear){
-    //   clear.addEventListener('click', () => {
-    //     paths.splice(0);
-    //     const resetBackground = p5 => {p5.background(255)}
-    //     resetBackground();
-    //   });
-    //   }
- 
     return <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />;
 };

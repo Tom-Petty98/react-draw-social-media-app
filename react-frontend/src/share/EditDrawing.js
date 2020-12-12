@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-const axios = require('axios')
+const axios = require('axios');
+require("dotenv").config();
 
 class EditDrawing extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class EditDrawing extends Component {
     
 
       async handleSubmit(event) {       
-        await axios.patch('http://localhost:3001/api/posts/update/' + this.props.post.drawing_id.toString(), {
+        await axios.patch( process.env.REACT_APP_API_URL + 'posts/update/' + this.props.post.drawing_id.toString(), {
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture

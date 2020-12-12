@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import EditDrawing from './EditDrawing';
 const axios = require('axios');
+require("dotenv").config();
 
 // so that each post has its own comments and description each will have to rendered here
 // comments will be hidden but can be accessed by clicking the comments icon.
@@ -31,7 +32,7 @@ function Post({post, toggleLike}) {
   }
 
   async function handleDeleteClick(){
-    await axios.delete('http://localhost:3001/api/posts/delete/' + post.drawing_id.toString())
+    await axios.delete( process.env.REACT_APP_API_URL + 'posts/delete/' + post.drawing_id.toString())
         .then( response => console.log(response))
         .catch( error => console.log(error));
   }

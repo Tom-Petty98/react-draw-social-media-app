@@ -7,10 +7,12 @@ class DrawPage extends Component{
     this.state = {
       color: "#000000",
       weight: 3,
-      clear: false
+      clear: false,
+      share: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleShare = this.handleShare.bind(this);
   }
 
   handleChange(event, name) {
@@ -27,8 +29,14 @@ class DrawPage extends Component{
     })
   } 
 
+  handleShare(){
+    this.setState({
+      share: !this.state.share
+    })
+  } 
+  
   render(){
-    const {color, weight, clear} = this.state
+    const {color, weight, clear, save, share} = this.state
     return (
       <div>
         <div className="sidebar">        
@@ -44,11 +52,15 @@ class DrawPage extends Component{
                 onChange={e => this.handleChange(e, 'weight')}/>
               </li>
               <li>
+                <button id="share" onClick={this.handleShare}><i className="fas fa-share"></i></button>
+              </li>
+              <li>
                 <button id="clear" onClick={this.handleClear}><i className="fas fa-trash"></i></button>
               </li>
           </ul> 
         </div>
-        <Sketch color={color} weight={weight} clear={clear} handleClear={this.handleClear}/>
+        <Sketch color={color} weight={weight} clear={clear} handleClear={this.handleClear}
+          share={share} handleShare={this.handleShare}/>
       </div>
     )
   }
