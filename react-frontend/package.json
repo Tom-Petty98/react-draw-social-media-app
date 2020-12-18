@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "-": "0.0.1",
+    "redux-immutable-state-invariant": "^2.1.0"
   }
 }

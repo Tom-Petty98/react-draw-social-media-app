@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DrawingsList from './DrawingsList';
+import * as drawingActions from "../../redux/actions/drawingActions";
+import { bindActionCreators } from "redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadDrawings } from "../../redux/actions/drawingActions"
+
 require("dotenv").config();
 
 
 
 function SharedDrawings() {
 
+  const drawings = useSelector((state) => state.notes);
+  const dispatch = useDispatch();
+
 	useEffect(() => {
-		const { drawings, actions } = this.props;
 
     if (drawings.length === 0) {
-      actions.loadDrawings().catch(error => {
-        alert("Loading courses failed" + error);
-      });
+      dispatch(loadDrawings().catch(error => {
+        alert("Loading drawings failed" + error);
+      }));
 		}
 		
 	}, [])
@@ -31,23 +38,25 @@ function SharedDrawings() {
 	)
 }
 
-function mapStateToProps(state) {
-  return {
-    drawings: state.drawings
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     drawings: state.drawings
+//   };
+// }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      loadCourses: bindActionCreators(courseActions.loadDrawings, dispatch)
-     // loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
-    }
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: {
+//       loadDrawings: bindActionCreators(drawingActions.loadDrawings, dispatch)
+//      // loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
+//     }
+//   };
+// }
 
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SharedDrawings);
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(SharedDrawings);
+
+export default SharedDrawings;
