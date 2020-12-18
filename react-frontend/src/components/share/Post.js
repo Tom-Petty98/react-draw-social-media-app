@@ -44,7 +44,7 @@ function Post({post, toggleLike}) {
   return (
     <div>
       <h1>{post.title}</h1>     
-      <img src={post.picture} alt=""></img>
+      <img src={post.picture} alt="" width="300" height="350"></img>
       {/* <input className="like-button" type="checkbox" checked={post.liked} onChange={handleLikeClick}></input> */}
       <button className="description-arrow" onClick={toggleDescription}>Description</button>
       <button onClick={handleEditClick}>Edit Post</button>

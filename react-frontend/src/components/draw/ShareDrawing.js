@@ -11,12 +11,14 @@ class ShareDrawing extends Component {
             title:'',
             description: '',
             picture: 'pic.file.location',
-            file: ''
+            file: null,
+            imgLoaded: false
 //            likes: 0,
 //            comments: 'maybe this just holds a refernce to the comments table',
         };
     
         this.handleChange = this.handleChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
         this.handleImgSubmit = this.handleImgSubmit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
@@ -27,6 +29,13 @@ class ShareDrawing extends Component {
 
         this.setState({
             [name]: value
+        })
+      }
+
+      handleFileChange(event) {
+        this.setState({
+          file: event.target.files[0],
+         // loaded: 0,
         })
       }
 
@@ -47,6 +56,7 @@ class ShareDrawing extends Component {
       handleImgSubmit(e) {
         e.preventDefault();
         let file = this.state.file;
+        console.log(file);
         const fd = new FormData();
         fd.append("image", file);
         axios({
@@ -54,7 +64,10 @@ class ShareDrawing extends Component {
             method: "post",
             data: fd,
         }).then(res => {
-            this.setState({picture: res.data.path});
+            this.setState({
+              picture: res.data.path,
+              imgLoaded: true
+            });
         });
       }
     
@@ -76,20 +89,26 @@ class ShareDrawing extends Component {
     
       // need to somehow save and retrive the picture when entering this page.
       render() {
-        const { title, description, picture, file } = this.state
+        const { title, description, picture, file, imgLoaded } = this.state
         return (
           <div>
+            <h1>Share Your Awesome Drawing For Others To See</h1>
+            { imgLoaded && 
+            <img src={picture} alt="" width="300" height="350"></img>}
+            <br />
             <form method="post" action="/save-image" enctype="multipart/form-data" onSubmit={this.handleImgSubmit}>
-              <input type="file" name="image" value={file} onChange={e => this.handleChange(e, 'file')}/>
+              <input type="file" name="image" onChange={this.handleFileChange}/>
               <button type="submit">Submit</button>
             </form>
+            <br/>
+            <br/>
             <form method='POST' onSubmit={this.handleSubmit}>
               <label>
                 Title:
                 <input type="text" value={title} onChange={e => this.handleChange(e, 'title')} />
               </label>
               <br />
-              <img src={picture}></img>
+              
               <br />
               <label>
                   Description:

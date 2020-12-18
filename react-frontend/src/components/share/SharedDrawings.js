@@ -7,8 +7,6 @@ require("dotenv").config();
 
 function SharedDrawings() {
 	const url = process.env.REACT_APP_API_URL + "posts";
-	console.log(url);
-	console.log(require("dotenv").config())
 
 	const [posts, loading] = useFetch(url);
 
