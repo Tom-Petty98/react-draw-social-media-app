@@ -11,5 +11,5 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
-  );
+  );  
 }

@@ -1,4 +1,5 @@
 import { handleResponse, handleError } from "./apiUtils.js";
+require("dotenv").config();
 
 const baseUrl = process.env.REACT_APP_API_URL + "/drawings/";
 // gonna change the backend path from posts to drawings 

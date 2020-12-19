@@ -2,26 +2,25 @@ import React, { useState, useEffect } from 'react';
 import DrawingsList from './DrawingsList';
 import * as drawingActions from "../../redux/actions/drawingActions";
 import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
-import { loadDrawings } from "../../redux/actions/drawingActions"
+import { connect } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
+//import { loadDrawings } from "../../redux/actions/drawingActions"
 
 require("dotenv").config();
 
 
 
-function SharedDrawings() {
+function SharedDrawings({ drawings, actions }) {
 
-  const drawings = useSelector((state) => state.notes);
-  const dispatch = useDispatch();
+  console.log(drawings)
 
 	useEffect(() => {
-
+    // will only load if arr is empty
     if (drawings.length === 0) {
-      dispatch(loadDrawings().catch(error => {
+      actions.loadDrawings().catch(error => {
         alert("Loading drawings failed" + error);
-      }));
-		}
-		
+      });
+		}	
 	}, [])
 
 	// allows you to like and unlike
@@ -38,25 +37,23 @@ function SharedDrawings() {
 	)
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     drawings: state.drawings
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    drawings: state.drawings
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: {
-//       loadDrawings: bindActionCreators(drawingActions.loadDrawings, dispatch)
-//      // loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
-//     }
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      loadDrawings: bindActionCreators(drawingActions.loadDrawings, dispatch)
+     // loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
+    }
+  };
+}
 
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(SharedDrawings);
-
-export default SharedDrawings;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SharedDrawings);

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import courses from "./drawingReducer";
+import drawings from "./drawingReducer";
 // import users from "./usersReducer";
 
 const rootReducer = combineReducers({
-  courses
+  drawings
 //  users
 });
 
