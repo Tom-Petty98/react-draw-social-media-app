@@ -7,12 +7,12 @@ export default function drawingReducer(state = initialState.drawings, action) {
       return [...state, { ...action.drawing }];
     case types.UPDATE_DRAWING_SUCCESS:
       return state.map(drawing =>
-        drawing.id === action.drawing.id ? action.drawing : drawing
+        drawing.drawing_id === action.drawing.drawing_id ? action.drawing : drawing
       );
     case types.LOAD_DRAWING_SUCCESS:
       return action.drawings;
     case types.DELETE_DRAWING_OPTIMISTIC:
-      return state.filter(drawing => drawing.id !== action.drawingId);
+      return state.filter(drawing => drawing.drawing_id !== action.drawingId);
     default:
       return state;
   }

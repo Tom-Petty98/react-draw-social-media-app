@@ -8,7 +8,7 @@ require("dotenv").config();
 // is comments a relational data base and to return the num of comments is the best way to run a query
 // where would this code be
 
-function Drawing({drawing, toggleLike}) {
+function Drawing({drawing, toggleLike, handleEdit, handleDelete}) {
   
   function handleLikeClick(){
     toggleLike(drawing.drawing_id)
@@ -32,13 +32,11 @@ function Drawing({drawing, toggleLike}) {
   }
 
   async function handleDeleteClick(){
-    await axios.delete( process.env.REACT_APP_API_URL + 'drawings/delete/' + drawing.drawing_id.toString())
-        .then( response => console.log(response))
-        .catch( error => console.log(error));
+    handleDelete(drawing.drawing_id)
   }
 
   if(edit_drawing){
-    return <EditDrawing drawing={drawing} handleEditClick={handleEditClick} />
+    return <EditDrawing drawing={drawing} handleEditClick={handleEditClick} handleEdit={handleEdit} />
   }
 
   return (

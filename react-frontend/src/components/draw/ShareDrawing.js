@@ -59,7 +59,7 @@ class ShareDrawing extends Component {
     
 
       async handleSubmit(event) {       
-        await axios.post( process.env.REACT_APP_API_URL + 'posts/create', {
+        await axios.post( process.env.REACT_APP_API_URL + 'drawings/create', {
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture

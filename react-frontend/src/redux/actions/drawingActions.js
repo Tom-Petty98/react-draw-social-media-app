@@ -19,9 +19,9 @@ export function createDrawing(drawing) {
   return function(dispatch, getState) {
     return drawingApi
       .createDrawing(drawing)
-      .then(savedDrawing => {
-        dispatch({ type: types.CREATE_DRAWING_SUCCESS, savedDrawing });
-      })
+      .then(
+        dispatch({ type: types.CREATE_DRAWING_SUCCESS, drawing })
+      )
       .catch(error => {
         throw error;
       });
@@ -33,9 +33,9 @@ export function updateDrawing(drawing) {
   return function(dispatch, getState) {
     return drawingApi
       .updateDrawing(drawing)
-      .then(savedDrawing => {
-        dispatch({ type: types.UPDATE_DRAWING_SUCCESS, savedDrawing })
-      })
+      .then(
+        dispatch({ type: types.UPDATE_DRAWING_SUCCESS, drawing })
+      )
       .catch(error => {
         throw error;
       });

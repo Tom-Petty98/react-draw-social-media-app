@@ -7,9 +7,9 @@ class EditDrawing extends Component {
     constructor(props) {
         super(props);
         this.state = {          
-            title: this.props.post.title,
-            description: this.props.post.description,
-            picture: this.props.post.picture
+            title: this.props.drawing.title,
+            description: this.props.drawing.description,
+            picture: this.props.drawing.picture
 //            likes: 0,
 //            comments: 'maybe this just holds a refernce to the comments table',
         };
@@ -36,16 +36,15 @@ class EditDrawing extends Component {
       }
     
 
-      async handleSubmit(event) {       
-        await axios.patch( process.env.REACT_APP_API_URL + 'posts/update/' + this.props.post.drawing_id.toString(), {
+      async handleSubmit(event) {
+        event.preventDefault();
+        const editedDrawing = {
+          "drawing_id": this.props.drawing.drawing_id,
           "title": this.state.title,
           "description": this.state.description,
           "picture": this.state.picture
-        })
-        .then( response => console.log(response))
-        .catch( error => console.log(error));
-
-        event.preventDefault();
+        };
+        this.props.handleEdit(editedDrawing)       
         this.props.handleEditClick();
       }     
     
