@@ -11,6 +11,8 @@ export default function drawingReducer(state = initialState.drawings, action) {
       );
     case types.LOAD_DRAWING_SUCCESS:
       return action.drawings;
+    case types.DELETE_DRAWING_OPTIMISTIC:
+      return state.filter(drawing => drawing.id !== action.drawingId);
     default:
       return state;
   }

@@ -41,3 +41,12 @@ export function updateDrawing(drawing) {
       });
   };
 }
+
+export function deleteDrawing(drawingId) {
+  return function(dispatch) {
+    // Doing optimistic delete, so not dispatching begin/end api call
+    // actions, or apiCallError action since we're not showing the loading status for this.
+    dispatch({ type: types.DELETE_DRAWING_OPTIMISTIC, drawingId});
+    return drawingApi.deleteDrawing(drawingId);
+  };
+}

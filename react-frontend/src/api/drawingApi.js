@@ -21,7 +21,7 @@ export function createDrawing(drawing) {
 }
 
 export function updateDrawing(drawing) {
-  return fetch(baseUrl + "update" + drawing.id, {
+  return fetch(baseUrl + "update/" + drawing.id, {
     method: "PUT", 
     headers: { "content-type": "application/json" },
     body: JSON.stringify(drawing)
